@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<style>
+    body {
+    font-family: 'Poppins', sans-serif;
+    background:lightblue;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+.container {
+    max-width: 400px;
+    margin-top:300px !important;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+h2 {
+    color: #444;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+input[type="text"] {
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+button {
+    background: #d21502;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+button:hover {
+    background: #d21502;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    background: rgba(255, 255, 255, 0.95);
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+</style>
+<body>
+    <div class="container">
+        <h2>Edit Task</h2>
+        <form action="/editTask/<%= editTask.id %>" method="POST">
+            <input type="text" name="task" value="<%= editTask.task %>" required>
+            <button type="submit">Update Task</button>
+        </form>
+    </div>
+</body>
+</html>
