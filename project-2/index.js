@@ -3,7 +3,7 @@ const port = 8015;
 
 const server = express();
 
-server.use(express.urlencoded());
+server.use(express.urlencoded()); 
 server.set("view engine", "ejs");
 
 let taskData = [
@@ -19,23 +19,26 @@ server.get("/", (req, res) => {
 server.get("/editTask/:id", (req, res) => {
     let editTask = taskData.find(task => task.id === req.params.id);
     if (!editTask) {
-        return res.redirect("/");
+        return res.redirect("/"); 
     }
     res.render("edit", { editTask });
 });
 
 server.post("/addTask", (req, res) => {
-    const { id, task } = req.body;
+    const { task } = req.body;
 
-    if (taskData.some(t => t.id === id)) {
-        console.log("Error: Task ID already exists");
-        return res.redirect("/");
+    if (!task) {
+        console.log("Error: Task is required");
+        return res.redirect("/"); 
     }
+
+    const id = (taskData.length + 1).toString();
 
     taskData.push({ id, task });
     console.log("Task added:", { id, task });
     res.redirect("/");
 });
+
 server.get("/deleteTask/:id", (req, res) => {
     let taskId = req.params.id;
     taskData = taskData.filter(task => task.id !== taskId);
@@ -47,6 +50,11 @@ server.post("/editTask/:id", (req, res) => {
     let taskId = req.params.id;
     const { task } = req.body;
 
+    if (!task) {
+        console.log("Error: Task cannot be empty");
+        return res.redirect("/editTask/" + taskId); 
+    }
+
     let index = taskData.findIndex(t => t.id === taskId);
     if (index !== -1) {
         taskData[index] = { id: taskId, task };
@@ -57,5 +65,5 @@ server.post("/editTask/:id", (req, res) => {
 });
 
 server.listen(port, () => {
-    console.log(`Server started at http://localhost:${port}`)
+    console.log(`Server started at http://localhost:${port}`);
 });

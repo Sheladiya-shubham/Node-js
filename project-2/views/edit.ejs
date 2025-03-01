@@ -71,6 +71,7 @@ li {
     <div class="container">
         <h2>Edit Task</h2>
         <form action="/editTask/<%= editTask.id %>" method="POST">
+            <p><strong>Editing Task ID:</strong> <%= editTask.id %></p>
             <input type="text" name="task" value="<%= editTask.task %>" required>
             <button type="submit">Update Task</button>
         </form>

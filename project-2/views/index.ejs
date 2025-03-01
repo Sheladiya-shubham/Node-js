@@ -96,6 +96,7 @@ li {
         <ul>
             <% tasks.forEach(task => { %>
                 <li>
+                    <span><%= task.id %></span>
                     <span><%= task.task %></span>
                     <div>
                         <a href="/editTask/<%= task.id %>" class="ed">Edit</a>
