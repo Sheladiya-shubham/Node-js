@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Management</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        
+        body {
+            background-color:#e6364d;
+            font-family:sans-serif;
+
+        }
+        nav{
+            background-color:white;
+            height: 80px;
+        }
+        .navbar-brand{
+            color: black;
+            font-size:30px;
+            font-weight: 600;
+            margin-top:-30px;
+        }
+        .navbar ul li a{
+            color: black;
+            font-size:20px;
+            font-weight: 600;
+            margin-top: -30px;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .btn-danger, .btn-primary {
+            width: 80px;
+        }
+        .rating {
+            font-size: 18px;
+            color: gold;
+        }
+        .carousel-item img{
+            height:850px;
+            width: 100%;
+        }
+        .btn{
+            background-color: #e6364d;
+            color: white !important;
+            border-radius: 40px;
+            margin-left: 20px;
+        }
+        .btn:hover{
+            background-color: #e6364d;
+            color: white !important;
+            border-radius: 40px;
+            margin-left: 20px;
+        }
+        .back-btn{
+            background-color:white;
+            color:#e6364d !important;
+            border-radius: 40px;
+            font-weight: 600;
+            margin-left: 20px;
+        }
+        .back-btn:hover{
+            background-color:white;
+            color:#e6364d !important;
+            border-radius: 40px;
+            margin-left: 20px;
+        }
+        .card-body h5{
+            font-size: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .card-body p{
+            font-size: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .card{
+            border-radius: 30px;
+        }
+        .card img{
+            border-radius: 30px;
+            padding: 10px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Movie Bazar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Movies</a></li>
+                    <li class="nav-item"><a href="#" id="addMovieBtn" class="nav-link btn">Add Movie</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="movie-carousel">
+        <div id="movieCarousel" class="carousel slide mt-3 container" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item ">
+                    <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/medium/umbarro-et00420660-1734089497.jpg"
+                        class="d-block" alt="Movie Image">
+                </div>
+                <div class="carousel-item active">
+                    <img src="https://assets-in.bmscdn.com/discovery-catalog/events/et00383800-mjrluzlcwc-landscape.jpg"
+                        class="d-block" alt="Movie Image">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://assets-in.bmscdn.com/discovery-catalog/events/et00408691-xytvrpebna-landscape.jpg"
+                        class="d-block " alt="Movie Image">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://assets-in.bmscdn.com/discovery-catalog/events/et00418991-ylbtzepnhb-landscape.jpg"
+                        class="d-block " alt="Movie Image">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://assets-in.bmscdn.com/discovery-catalog/events/et00418422-zdvsnesruj-landscape.jpg"
+                        class="d-block " alt="Movie Image">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </div>
+
+
+   <div class="movie">
+    <div class="container">
+        <!-- back button -->
+        <button id="backButton" class="btn btn-secondary back-btn mb-3" style="display: none;"> 👈Back</button>
+
+
+        <!-- Movie Form -->
+        <div class="card p-4 mb-4">
+            <h3 class="text-center">Add New Movie</h3>
+            <form action="/add-movie" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input type="text" name="title" class="form-control" placeholder="Title" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="director" class="form-control" placeholder="Director" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="genre" class="form-control" placeholder="Genre" required>
+                </div>
+                <div class="mb-3">
+                    <input type="number" name="year" class="form-control" placeholder="Year" required>
+                </div>
+
+                <!-- Rating Dropdown -->
+                <div class="mb-3">
+                    <label class="form-label">Rating</label>
+                    <select name="rating" class="form-control" required>
+                        <option value="1">⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <input type="file" name="poster" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success w-100">Add Movie</button>
+            </form>
+        </div>
+     <!-- Movie List -->
+     <div class="row">
+        <% allMovies.forEach((movie, index) => { %>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <% if (movie.poster) { %>
+                        <img src="<%= movie.poster %>" class="card-img-top" alt="<%= movie.title %>">
+                    <% } else { %>
+                        <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="No Poster">
+                    <% } %>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= movie.title %></h5>
+                        <p class="card-text"><strong>Director:</strong> <%= movie.director %></p>
+                        <p class="card-text"><strong>Genre:</strong> <%= movie.genre %></p>
+                        <p class="card-text"><strong>Year:</strong> <%= movie.year %></p>
+
+                        <!-- Star Rating -->
+                        <p class="card-text">
+                            <strong>Rating:</strong>
+                            <span class="rating">
+                                <% for (let i = 0; i < movie.rating; i++) { %> ⭐ <% } %>
+                            </span>
+                        </p>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="/edit-movie/<%= movie.id %>" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/delete-movie/<%= movie.id %>" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+       
+
+    </div>
+   </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
+   document.addEventListener("DOMContentLoaded", function () {
+    const addMovieBtn = document.getElementById("addMovieBtn");
+    const backButton = document.getElementById("backButton");
+    const movieSection = document.querySelector(".movie");
+    const carouselSection = document.getElementById("movieCarousel");
+
+    // Initially hide the movie section
+    movieSection.style.display = "none";
+
+    addMovieBtn.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // Show movie section, hide carousel, and show back button
+        movieSection.style.display = "block";
+        carouselSection.style.display = "none";
+        backButton.style.display = "inline-block";
+    });
+
+    backButton.addEventListener("click", function () {
+        // Hide movie section, show carousel, hide back button
+        movieSection.style.display = "none";
+        carouselSection.style.display = "block";
+        backButton.style.display = "none";
+    });
+});
+
+
+   </script>
+    
+
+</body>
+</html>
