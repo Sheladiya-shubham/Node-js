@@ -6,34 +6,133 @@
     <title>Edit Movie</title>
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
+        
         body {
-            background-color: #f8f9fa;
+            background-color:#e6364d;
+            font-family:sans-serif;
+
+        }
+        nav{
+            background-color:white;
+            height: 80px;
+        }
+        .navbar-brand{
+            color: black;
+            font-size:30px;
+            font-weight: 600;
+            margin-top:-30px;
+        }
+        .navbar ul li a{
+            color: black;
+            font-size:20px;
+            font-weight: 600;
+            margin-top: -30px;
         }
         .container {
-            margin-top: 50px;
-            max-width: 600px;
+            margin-top: 30px;
         }
-        .card {
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-        .form-control {
-            margin-bottom: 10px;
-        }
-        .btn-primary {
-            width: 100%;
-        }
-        .poster-preview {
-            width: 100%;
-            max-height: 300px;
+        .card img {
+            height: 200px;
             object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
         }
+        /* .card {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        } */
+        .btn-danger, .btn-primary {
+            width: 80px;
+        }
+        .rating {
+            font-size: 18px;
+            color: gold;
+        }
+        .carousel-item img{
+            height:850px;
+            width: 100%;
+        }
+        .btn{
+            background-color: #e6364d;
+            color: white !important;
+            border-radius: 40px;
+            margin-left: 20px;
+            font-weight: 600;
+            border: none;
+        }
+        .btn:hover{
+            background-color: #e6364d;
+            color: white !important;
+            border-radius: 40px;
+            font-weight: 600;
+            border: none;
+            /* margin-left: 20px; */
+            
+        }
+        .back-btn{
+            background-color:white;
+            color:#e6364d !important;
+            border-radius: 40px;
+            font-weight: 600;
+            margin-left: 20px;
+        }
+        .back-btn:hover{
+            background-color:white;
+            color:#e6364d !important;
+            border-radius: 40px;
+            margin-left: 20px;
+        }
+        .card-body h5{
+            font-size: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .card-body p{
+            font-size: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .card{
+            border-radius: 30px;
+            width:50%;
+            margin: 0 auto;
+            padding: 20px;
+            
+        }
+        .card .poster-preview{
+            border-radius: 30px;
+            padding: 10px;
+            text-align: center;
+            margin-left: 110px;
+        }
+        .update{
+            width: 100%;
+            margin: 0 auto;
+        }
+    
+       
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Movie Bazar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Movies</a></li>
+                    <li class="nav-item"><a href="#" id="addMovieBtn" class="nav-link btn">Add Movie</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
         <h2 class="text-center mb-4">🎬 Edit Movie</h2>
@@ -43,7 +142,7 @@
                 
                 <!-- Movie Poster Preview -->
                 <% if (movie.poster) { %>
-                    <img src="<%= movie.poster %>" class="poster-preview" alt="<%= movie.title %>">
+                    <img src="<%= movie.poster %>" class="poster-preview " alt="<%= movie.title %>">
                 <% } else { %>
                     <img src="https://via.placeholder.com/200x300" class="poster-preview" alt="No Poster">
                 <% } %>
@@ -84,7 +183,7 @@
                     <input type="file" name="poster" class="form-control">
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update Movie</button>
+                <button type="submit" class="btn btn-primary update">Update Movie</button>
             </form>
         </div>
     </div>

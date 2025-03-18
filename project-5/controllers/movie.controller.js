@@ -1,4 +1,4 @@
-const Movie = require("../model/movie.model");
+const Movie = require("../models/movie.model");
 const path = require("path");
 const fs = require("fs");
 
