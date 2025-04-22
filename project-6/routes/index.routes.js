@@ -3,7 +3,7 @@ const routes = express.Router();
 const {dashBoard, loginPage, loginAdmin, logout,profilePage, forgotPasswordPage,sendEmail,verifyOTP,changePassword} = require("../controller/index.controller");
 
 routes.get("/", loginPage);
-routes.get("/dashboard", dashBoard);
+routes.get("/dashboard", dashBoard);    
 
 
 routes.post('/sendEmail',sendEmail);

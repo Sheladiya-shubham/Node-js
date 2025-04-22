@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+
+    <!-- FontAwesome CDN for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            background-color: white;
+            width: 80%;
+            max-width: 900px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Profile Image */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #ff3f6c;  /* Myntra's pink color */
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        /* Profile Name */
+        .profile-info h2 {
+            color: #333;
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Profile Details */
+        .profile-info p {
+            color: #777;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .profile-info p strong {
+            color:#ff3f6c; /* Myntra's blue color */
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: #ff3f6c;  /* Myntra's blue color */
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color:#ff3f6c;
+        }
+
+        /* Button Styles for Secondary */
+        .btn-secondary {
+            background-color: #f8f9fa;
+            color:#ff3f6c; /* Myntra's blue color */
+            border: 2px solid #ff3f6c;
+        }
+
+        .btn-secondary:hover {
+            background-color:#ff3f6c;
+            color: white;
+        }
+
+        /* Social Links Section */
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px;
+            background-color: #ff3f6c; /* Myntra's pink color */
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #e02f55;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .profile-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-info h2 {
+                font-size: 24px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <!-- Profile Image -->
+    <img src="<%= (user && user.userImage) ? user.userImage : 'https://via.placeholder.com/150' %>" alt="Profile Image" class="profile-img">
+
+
+        <div class="profile-info">
+            <!-- User Name -->
+            <h2><%= user.firstName %> <%= user.lastName %></h2>
+
+            <!-- User Details -->
+            <p><strong>Email:</strong> <%= user.email %></p>
+            
+            <!-- Action Buttons -->
+            <div>
+                <a href="/user" class="btn">Back to Home Page</a>
+                <a href="/user/user-logout" class="btn btn-secondary">Logout</a>
+            </div>
+
+            <!-- Social Links (Real Icons) -->
+            <div class="social-links">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/<%= user.facebook || 'yourUsername' %>" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <!-- Twitter -->
+                <a href="https://twitter.com/<%= user.twitter || 'yourUsername' %>" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/<%= user.linkedin || 'yourUsername' %>" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

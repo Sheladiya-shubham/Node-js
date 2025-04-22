@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Favorite Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f8f9fa;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: #666;
+      flex-grow: 1;
+    }
+
+    .remove-btn {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #e91e63;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-block;
+    }
+
+    .remove-btn:hover {
+      background-color: #d81b60;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .back-link a {
+      color: #e91e63;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Your Favorite Products</h1>
+
+<div class="grid">
+  <% favorites.forEach(fav => { %>
+    <% if (fav.productId) { %>
+      <div class="card">
+        <% if (fav.productId.productImage) { %>
+          <img src="<%= fav.productId.productImage %>" alt="<%= fav.productId.title %>">
+        <% } else { %>
+          <img src="/images/placeholder.png" alt="No Image">
+        <% } %>
+        <div class="card-body">
+          <div class="card-title"><%= fav.productId.title %></div>
+          <div class="card-desc"><%= fav.productId.desc %></div>
+          <!-- Remove from Favorites Button -->
+          <a href="/user/remove-favorite/<%= fav._id %>" class="remove-btn">Remove from Favorites</a>
+        </div>
+      </div>
+    <% } %>
+  <% }) %>
+</div>
+
+<div class="back-link">
+  <a href="/user">← Back to User Page</a>
+</div>
+
+</body>
+</html>

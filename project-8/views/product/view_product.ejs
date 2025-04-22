@@ -1,0 +1,66 @@
+<%- include('../header') %>
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Product Catalog</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- Search Form -->
+<div class="mb-4 text-center">
+    <form method="GET" action="/product/view-product" class="form-inline justify-content-center">
+        <input type="text" name="search" class="form-control mr-2" placeholder="Search products..." value="<%= typeof search !== 'undefined' ? search : '' %>">
+        <button type="submit" class="btn btn-outline-primary">Search</button>
+    </form>
+</div>
+        <!-- Category Buttons -->
+        <div class="mb-4 text-center">
+            <% 
+                const colors = ['primary', 'success', 'danger', 'info', 'warning', 'dark'];
+            %>
+                <a class="btn btn-dark mr-2 mb-2" href="/product/view-product">
+                    All
+                </a>
+            <%
+                categories.forEach((category, index) => { 
+                    const colorClass = colors[index % colors.length]; 
+            %>
+                <a class="btn btn-<%= colorClass %> mr-2 mb-2" href="/product/view-product?category=<%= category._id %>">
+                    <%= category.category %>
+                </a>
+            <% }); %>
+        </div>
+        <!-- Product Grid -->
+        <div class="row">
+            <% allProducts.forEach((product) => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="<%= product.productImage %>" class="card-img-top" alt="<%= product.title %>" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= product.title %></h5>
+                            <p class="card-text text-muted"><%= product.category ? product.category.category : 'Uncategorized' %></p>
+
+                            <p class="card-text"><%= product.desc.length > 100 ? product.desc.substring(0, 100) + '...' : product.desc %></p>
+                            <h6 class="text-success font-weight-bold">₹ <%= product.price %></h6>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 text-right">
+                            <a href="/product/single-product/<%= product._id %>" class="btn btn-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+<%- include('../footer') %>

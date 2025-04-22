@@ -1,0 +1,79 @@
+<%- include('../header') %>
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Tables</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title m-b-0">Sub Category Information</h5>
+                            </div>
+                            <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Category Name</th>
+                                      <th scope="col">Category Image</th>
+                                      <th scope="col">Sub Category Name</th>
+                                      <th scope="col">Actions</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                   <% subCategories.map((subCate, i)=> { %>
+                                        <tr>
+                                            <td><%= i+1 %></td>
+                                            <td><%= subCate.category.category %></td>
+                                            <td><img src="<%= subCate.category.categoryImage %>" height="80" /></td>
+                                            <td><%= subCate.subCategory %></td>
+                                            <td><a href="/subCategory/edit-subcategory/<%= subCate._id %>"><i class="fas fa-edit"></i></a> &nbsp; || &nbsp; <a href="/subCategory/delete-subcategory/<%= subCate._id %>"><i class="fas fa-trash"></i></a> </td>
+                                        </tr>
+                                   <% }) %>
+                                  </tbody>
+                            </table>
+                        </div>
+                      
+                        
+                        
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+<%- include('../footer') %>
