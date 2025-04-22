@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Favorite Products</title>
+  <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js
+    "></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -114,6 +117,8 @@
           <div class="card-title"><%= fav.productId.title %></div>
           <div class="card-desc"><%= fav.productId.desc %></div>
           <!-- Remove from Favorites Button -->
+          <a href="/user/add-cart/<%= fav.productId._id %>" class="btn btn-myntra remove-btn">Add to Cart</a>
+
           <a href="/user/remove-favorite/<%= fav._id %>" class="remove-btn">Remove from Favorites</a>
         </div>
       </div>
@@ -125,5 +130,4 @@
   <a href="/user">← Back to User Page</a>
 </div>
 
-</body>
-</html>
+<%-include('../user-footer')%>

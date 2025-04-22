@@ -82,8 +82,10 @@ exports.usersignup = async (req, res) => {
   }
 exports.userlogin = async (req, res) => {
     try {
+      req.flash('success', 'Login successful!');
         return res.redirect("/user");
     }catch (error) {
+      req.flash('error', 'Something went wrong!');
       return res.redirect("back");
     }
 }
@@ -236,7 +238,8 @@ exports.getCartList = async (req, res) => {
     req.flash('error', 'Could not fetch cart.');
     return res.redirect('back');
   }
-};
+}; 
+
 
 exports.updateCartQuantity = async (req, res) => {
   console.log("Cart update triggered"); // Add this to check if the route is hit

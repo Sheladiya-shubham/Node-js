@@ -1,0 +1,29 @@
+
+    <script>
+        <% if(locals.flash.success && locals.flash.success.length > 0) { %>
+          const Toast = Swal.fire({
+    title: "<%= locals.flash.success %>",
+  icon: "success",
+  draggable: true
+});
+
+       <% } %>
+        <% if(locals.flash.error && locals.flash.error.length > 0) { %>
+          const Toast = Swal.fire({
+    title: "<%= locals.flash.error %>",
+  icon: "error",
+  draggable: true
+});
+
+       <% } %>
+        <% if(locals.flash.info && locals.flash.info.length > 0) { %>
+          const Toast = Swal.fire({
+    title: "<%= locals.flash.info %>",
+  icon: "info",
+  draggable: true
+});
+       <% } %>
+  </script>
+
+</body>
+</html>
