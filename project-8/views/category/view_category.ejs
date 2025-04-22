@@ -50,8 +50,8 @@
                                         <td><%= i + 1 %></td>
                                         <td><%= category.category %></td>
                                         <td><img src="<%= category.categoryImage %>" height="100" width="100" /></td>
-                                        <td><a href="/category/edit-category/<%= category._id %>" class="btn btn-warning">Edit</a>
-                                            &nbsp; || &nbsp; <a href="/category/delete-category/<%= category._id %>"><i class="fas fa-trash"></i></a></td>
+                                        <td><a href="/category/edit-category/<%= category._id %>" class="btn btn-success">Edit</a>
+                                            &nbsp; || &nbsp; <a href="/category/delete-category/<%= category._id %>" class="btn btn-danger"></i>Delete</a></td>
                                       </tr>
                                    <% }) %>
                                   </tbody>

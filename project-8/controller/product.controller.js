@@ -42,33 +42,39 @@ exports.addNewProduct = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   const { category, search } = req.query;
 
-    let filter = {};
+  let filter = {};
 
-    if (category) {
-        filter['category._id'] = category;
-    }
+  if (category) {
+    filter['category'] = category; // Correct way to filter by ObjectId
+  }
 
-    if (search) {
-        // Case-insensitive regex search on title or description
-        filter.$or = [
-            { title: { $regex: search, $options: 'i' } },
-            { desc: { $regex: search, $options: 'i' } }
-        ];
-    }
+  if (search) {
+    filter.$or = [
+      { title: { $regex: search, $options: 'i' } },
+      { desc: { $regex: search, $options: 'i' } }
+    ];
+  }
+
   try {
-    let categories = await Category.find();
-    let allProducts = await Product.find(filter)
-    .populate("category")
-    .populate("subcategory")
-    .populate("extracategory");
-    
-      return res.render("product/view_product", {allProducts, categories});
+    const categories = await Category.find();
+    const allProducts = await Product.find(filter)
+      .populate("category")
+      .populate("subcategory")
+      .populate("extracategory");
+
+    return res.render("product/view_product", {
+      allProducts,
+      categories,
+      search,
+      categoryFilter: category
+    });
   } catch (error) {
     console.log(error);
-    req.flash("error", "Somthing Wrong!!!");
+    req.flash("error", "Something went wrong!");
     return res.redirect("back");
   }
 };
+
 
 exports.getProduct = async (req, res) => {
   try {
@@ -93,10 +99,58 @@ exports.deleteProduct = async (req, res) => {
       if (!deletedProduct) {
           return res.status(404).send('Product not found');
       }
-
-      res.redirect('/product'); // Adjust if your product list is on a different route
+      req.flash('success', 'Product deleted successfully!');
+      res.redirect('/product/view-product'); // Correct route
   } catch (error) {
       console.error('Error deleting product:', error);
       res.status(500).send('Server Error');
+  }
+};
+
+exports.getEditProduct = async (req, res) => {
+  try {
+      const product = await Product.findById(req.params.id)
+          .populate('category')
+          .populate('subcategory')
+          .populate('extracategory');
+      const categories = await Category.find();
+      const subCategories = await SubCategory.find();
+      const extraCategories = await ExtraCategory.find();
+
+      res.render('product/edit-product', {
+          product,
+          categories,
+          subCategories,
+          extraCategories
+      });
+  } catch (err) {
+      console.error(err);
+      res.redirect('/product/view-product');
+  }
+};
+
+exports.postEditProduct = async (req, res) => {
+  try {
+      const { title, desc, category, subcategory, extracategory, price, quantity } = req.body;
+      const product = await Product.findById(req.params.id);
+      
+      product.title = title;
+      product.desc = desc;
+      product.category = category;
+      product.subcategory = subcategory;
+      product.extracategory = extracategory;
+      product.price = price;
+      product.quantity = quantity;
+
+      if (req.file) {
+          product.productImage = '/uploads/' + req.file.filename;
+      }
+
+      await product.save();
+      req.flash('success', 'Product updated successfully!');
+      res.redirect('/product/view-product');
+  } catch (err) {
+      console.error(err);
+      res.redirect('/product/view-product');
   }
 };

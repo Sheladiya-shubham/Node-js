@@ -51,7 +51,7 @@
                                             <td><%= subCate.category.category %></td>
                                             <td><img src="<%= subCate.category.categoryImage %>" height="80" /></td>
                                             <td><%= subCate.subCategory %></td>
-                                            <td><a href="/subCategory/edit-subcategory/<%= subCate._id %>"><i class="fas fa-edit"></i></a> &nbsp; || &nbsp; <a href="/subCategory/delete-subcategory/<%= subCate._id %>"><i class="fas fa-trash"></i></a> </td>
+                                            <td><a href="/subCategory/edit-subcategory/<%= subCate._id %>" class="btn btn-success">Edit</a> &nbsp; || &nbsp; <a href="/subCategory/delete-subcategory/<%= subCate._id %>" class="btn btn-danger">Delete</a> </td>
                                         </tr>
                                    <% }) %>
                                   </tbody>

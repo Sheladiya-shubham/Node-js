@@ -1,0 +1,65 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <h4 class="page-title">Edit Sub Category</h4>
+        <div class="ml-auto text-right">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Sub Category</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <form class="form-horizontal" action="/subCategory/update-subCategory/<%= subCategory._id %>" method="POST">
+            <div class="card-body">
+              <h4 class="card-title">Sub Category Info</h4>
+
+              <!-- Category Dropdown -->
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">Category</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="category" required>
+                    <option value="">Select Category</option>
+                    <% categories.forEach((cat) => { %>
+                      <option value="<%= cat._id %>" 
+                        <%= subCategory.category.toString() === cat._id.toString() ? 'selected' : '' %>>
+                        <%= cat.category %>
+                      </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Sub Category Name -->
+              <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">Sub Category</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="subCategory" value="<%= subCategory.subCategory %>" required>
+                </div>
+              </div>
+
+            </div>
+            <div class="border-top">
+              <div class="card-body">
+                <button type="submit" class="btn btn-primary">Update Sub Category</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../footer') %>

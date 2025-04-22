@@ -1,0 +1,111 @@
+<%- include('../header') %>
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Edit Product</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <form class="form-horizontal" action="/product/edit/<%= product._id %>" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <h4 class="card-title">Update Product Information</h4>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Title</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="title" value="<%= product.title %>" placeholder="Enter Title Here">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Description</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="desc" value="<%= product.desc %>" placeholder="Description Here">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Category</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="category">
+                                        <% categories.forEach((cat) => { %>
+                                            <option value="<%= cat._id %>" <%= product.category && product.category._id.toString() === cat._id.toString() ? 'selected' : '' %>><%= cat.category %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Sub Category</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="subcategory">
+                                        <% subCategories.forEach((subCat) => { %>
+                                            <option value="<%= subCat._id %>" <%= product.subcategory && product.subcategory._id.toString() === subCat._id.toString() ? 'selected' : '' %>><%= subCat.subCategory %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Extra Category</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="extracategory">
+                                        <% extraCategories.forEach((extCat) => { %>
+                                            <option value="<%= extCat._id %>" <%= product.extracategory && product.extracategory._id.toString() === extCat._id.toString() ? 'selected' : '' %>><%= extCat.extraCategory %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Price</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" name="price" value="<%= product.price %>" placeholder="Enter Price Here">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Quantity</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" name="quantity" value="<%= product.quantity %>" placeholder="Enter Quantity Here">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Product Image</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control-file" name="productImage">
+                                    <% if (product.productImage) { %>
+                                        <img src="<%= product.productImage %>" alt="Current Image" class="mt-2" style="height: 100px;">
+                                    <% } %>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-warning">Update Product</button>
+                                <a href="/product/view-product" class="btn btn-secondary ml-2">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../footer') %>
